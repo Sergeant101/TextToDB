@@ -1,0 +1,13 @@
+C:\_MAIN_\Programs\TextToDB\bin\Debug\netcoreapp3.1\TextToDB.exe
+C:\_MAIN_\Programs\TextToDB\bin\Debug\netcoreapp3.1\TextToDB.deps.json
+C:\_MAIN_\Programs\TextToDB\bin\Debug\netcoreapp3.1\TextToDB.runtimeconfig.json
+C:\_MAIN_\Programs\TextToDB\bin\Debug\netcoreapp3.1\TextToDB.runtimeconfig.dev.json
+C:\_MAIN_\Programs\TextToDB\bin\Debug\netcoreapp3.1\TextToDB.dll
+C:\_MAIN_\Programs\TextToDB\bin\Debug\netcoreapp3.1\TextToDB.pdb
+C:\_MAIN_\Programs\TextToDB\obj\Debug\netcoreapp3.1\TextToDB.csprojAssemblyReference.cache
+C:\_MAIN_\Programs\TextToDB\obj\Debug\netcoreapp3.1\TextToDB.AssemblyInfoInputs.cache
+C:\_MAIN_\Programs\TextToDB\obj\Debug\netcoreapp3.1\TextToDB.AssemblyInfo.cs
+C:\_MAIN_\Programs\TextToDB\obj\Debug\netcoreapp3.1\TextToDB.csproj.CoreCompileInputs.cache
+C:\_MAIN_\Programs\TextToDB\obj\Debug\netcoreapp3.1\TextToDB.dll
+C:\_MAIN_\Programs\TextToDB\obj\Debug\netcoreapp3.1\TextToDB.pdb
+C:\_MAIN_\Programs\TextToDB\obj\Debug\netcoreapp3.1\TextToDB.genruntimeconfig.cache
