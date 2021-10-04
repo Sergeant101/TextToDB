@@ -86,9 +86,15 @@ namespace TextToDB
                 // вопросительный знак
                 int AddrQuestMark = lineSource.IndexOf('?');
 
-
-                // заканчивает парсинг строки если пробелы кончились
-                if (AddrSpace == -1)
+                // здесь лучше всего было бы вычислить сумму адресов и если они равны -12 
+                // завершить цикл (если символ не найден IndexOf возвращает -1)
+                // всего признаков, по которым выделяем слова 12
+                int cancelCycle = AddrSpace + AddrDot + AddrComma + AddrOpenPar + AddrClosePar +
+                    AddrColon + AddrSemicolon + AddrDash + AddrBackslach + AddrForwardslach +
+                    AddrExlamPoint + AddrQuestMark;
+                // заканчивает парсинг строки если в строке не найдено ни одного
+                // символа, который может ограничивать слово
+                if (cancelCycle <= -12 )
                 {
                     break;
                 }
@@ -110,8 +116,9 @@ namespace TextToDB
             } while (true);
         }
 
+
         // =========================================================================================================
-        // Проверяем чтобы слова состояли из русских и английских символов
+        // Проверяем чтобы слова состояли только из русских и английских символов
         // пока отложим на перспективу !!!
         private bool CheckWord(string sourceWord)
         {
