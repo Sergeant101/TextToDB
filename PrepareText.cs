@@ -61,30 +61,39 @@ namespace TextToDB
             do
             {
 
-                // адрес первого пробела с начала строки
+                // 1 адрес первого пробела с начала строки
                 int AddrSpace       = lineSource.IndexOf(' ');
-                // точки
+                // 2 точки
                 int AddrDot         = lineSource.IndexOf('.');
-                // запятой
+                // 3 запятой
                 int AddrComma       = lineSource.IndexOf(',');
-                // отрывающей скобки
+                // 4 отрывающей скобки
                 int AddrOpenPar     = lineSource.IndexOf('(');
-                // закрывающей скобки
+                // 5 закрывающей скобки
                 int AddrClosePar    = lineSource.IndexOf(')');
-                // двоеточия
+                // 6 двоеточия
                 int AddrColon       = lineSource.IndexOf(':');
-                // точки с запятой
+                // 7 точки с запятой
                 int AddrSemicolon   = lineSource.IndexOf(';');
-                // тире
+                // 8 тире
                 int AddrDash        = lineSource.IndexOf('-');
-                // обратный слэш
+                // 9 обратный слэш
                 int AddrBackslach   = lineSource.IndexOf('/');
-                // прямой слэш
+                // 10 прямой слэш
                 int AddrForwardslach = lineSource.IndexOf('\\');
-                // восклицательный знак
+                // 11 восклицательный знак
                 int AddrExlamPoint = lineSource.IndexOf('!');
-                // вопросительный знак
+                // 12 вопросительный знак
                 int AddrQuestMark = lineSource.IndexOf('?');
+                // 13 одинарные ковычки
+                int AddrSinglQuotes = lineSource.IndexOf('\'');
+                // 14 двойные ковычки
+                int AddrDoubleQuotes = lineSource.IndexOf('"');
+                // 15 треугольные влево
+                int AddrTriangleLeft = lineSource.IndexOf('<');
+                // 16 треугольные вправо
+                int AddrTriangleRight = lineSource.IndexOf('>');
+
 
                 // здесь лучше всего было бы вычислить сумму адресов и если они равны -12 
                 // завершить цикл (если символ не найден IndexOf возвращает -1)
