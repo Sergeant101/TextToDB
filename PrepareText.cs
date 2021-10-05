@@ -48,7 +48,7 @@ namespace TextToDB
         // Парсим строку
         private void ParseLine(string lineSource, List <String> WordParce)
         {
-            // слова выделяем по пробелам делая проход с начала строки
+            // слова выделяем делая проход с начала строки
             // добавим в самый конец пробел чтобы он там точно был
             lineSource = lineSource + " ";
 
@@ -57,71 +57,89 @@ namespace TextToDB
 
             // верхняя граница длины слова
             int HiLimit = 20;
-                        
+
+            // список с позициями разделителей слов
+            List<int> posDelimiter = new List<int>(16);
+            
             do
             {
+                // бит завершает цикл если не осталось символов в строке
+                bool StopLoop = true;
+
+                // ближайший символ, который может ограничивать слово
+                int NextDelimiter = 2147483647;
 
                 // 1 адрес первого пробела с начала строки
-                int AddrSpace       = lineSource.IndexOf(' ');
+                posDelimiter.Insert(0, lineSource.IndexOf(' '));
                 // 2 точки
-                int AddrDot         = lineSource.IndexOf('.');
+                posDelimiter.Insert(1, lineSource.IndexOf('.'));
                 // 3 запятой
-                int AddrComma       = lineSource.IndexOf(',');
+                posDelimiter.Insert(2, lineSource.IndexOf(','));
                 // 4 отрывающей скобки
-                int AddrOpenPar     = lineSource.IndexOf('(');
+                posDelimiter.Insert(3, lineSource.IndexOf('('));
                 // 5 закрывающей скобки
-                int AddrClosePar    = lineSource.IndexOf(')');
+                posDelimiter.Insert(4, lineSource.IndexOf(')'));
                 // 6 двоеточия
-                int AddrColon       = lineSource.IndexOf(':');
+                posDelimiter.Insert(5, lineSource.IndexOf(':'));
                 // 7 точки с запятой
-                int AddrSemicolon   = lineSource.IndexOf(';');
+                posDelimiter.Insert(6, lineSource.IndexOf(';'));
                 // 8 тире
-                int AddrDash        = lineSource.IndexOf('-');
+                posDelimiter.Insert(7, lineSource.IndexOf('-'));
                 // 9 обратный слэш
-                int AddrBackslach   = lineSource.IndexOf('/');
+                posDelimiter.Insert(8, lineSource.IndexOf('/'));
                 // 10 прямой слэш
-                int AddrForwardslach = lineSource.IndexOf('\\');
+                posDelimiter.Insert(9, lineSource.IndexOf('\\'));
                 // 11 восклицательный знак
-                int AddrExlamPoint = lineSource.IndexOf('!');
+                posDelimiter.Insert(10, lineSource.IndexOf('!'));
                 // 12 вопросительный знак
-                int AddrQuestMark = lineSource.IndexOf('?');
+                posDelimiter.Insert(11, lineSource.IndexOf('?'));
                 // 13 одинарные ковычки
-                int AddrSinglQuotes = lineSource.IndexOf('\'');
+                posDelimiter.Insert(12, lineSource.IndexOf('\''));
                 // 14 двойные ковычки
-                int AddrDoubleQuotes = lineSource.IndexOf('"');
+                posDelimiter.Insert(13, lineSource.IndexOf('"'));
                 // 15 треугольные влево
-                int AddrTriangleLeft = lineSource.IndexOf('<');
+                posDelimiter.Insert(14, lineSource.IndexOf('<'));
                 // 16 треугольные вправо
-                int AddrTriangleRight = lineSource.IndexOf('>');
+                posDelimiter.Insert(15, lineSource.IndexOf('>'));
 
 
-                // здесь лучше всего было бы вычислить сумму адресов и если они равны -12 
-                // завершить цикл (если символ не найден IndexOf возвращает -1)
-                // всего признаков, по которым выделяем слова 12
-                int cancelCycle = AddrSpace + AddrDot + AddrComma + AddrOpenPar + AddrClosePar +
-                    AddrColon + AddrSemicolon + AddrDash + AddrBackslach + AddrForwardslach +
-                    AddrExlamPoint + AddrQuestMark;
                 // заканчивает парсинг строки если в строке не найдено ни одного
-                // символа, который может ограничивать слово
-                if (cancelCycle <= -12 )
+                // символа, который может ограничивать слово 
+                // т.е. все позиции делимитеров равны -1
+                foreach(int i in posDelimiter)
+                {
+                    if(i > 0)
+                    {
+                        StopLoop = false;
+                        // по пути поищем ближайший разделитель слов
+                        if (i < NextDelimiter)
+                        {
+                            NextDelimiter = i;
+                        }
+                    }
+                }
+
+                if (StopLoop)
                 {
                     break;
                 }
 
+                
                 // проверяем вхождение выделенного слова в заданные границы
-                if ((AddrSpace <= LoLimit) || (AddrSpace >= HiLimit))
+                if ((NextDelimiter <= LoLimit) || (NextDelimiter >= HiLimit))
                 {
                     // если полученное слово/символ не входят в границы
                     // удаляем из строки
-                    lineSource = lineSource.Remove(0, AddrSpace);
+                    lineSource = lineSource.Remove(0, NextDelimiter);
                 }
                 else
                 {
                     // получаем слово из строки
-                    string WordFromString = lineSource.Substring(0, AddrSpace);
-                    WordParce.Add(WordFromString);
+                    string WordFromString = lineSource.Substring(0, NextDelimiter);
+                    // делаем все прописными
+                    WordParce.Add(WordFromString.ToLower());
                 }
-
+               
             } while (true);
         }
 
