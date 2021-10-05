@@ -19,8 +19,9 @@ namespace TextToDB
 
         // =========================================================================================================
         // Читаем потрочно из файла
-        private void PrepareLine()
+        private void ReadFile()
         {
+            List<string> WordsFromTxt = new List<string>();
             try
             {
                 using (StreamReader sr = new StreamReader(Path))
@@ -28,25 +29,26 @@ namespace TextToDB
                     // строка для чтения данных из файла
                     string line;
 
-                    int i = 0;
-
                     // читаем в цикле пока не закончатся строки
                     while ((line = sr.ReadLine()) != null)
                     {
+                        WordsFromTxt.Clear();
+                        // получаем список слов из считанной строки
+                        ParseLine(line, WordsFromTxt);
 
                     }
                 }
             }
             finally
             {
-                
+                // тут можно чё нить добавить о том что чтение не удалось
             }
         }
 
 
         // =========================================================================================================
         // Парсим строку
-        void ParseLine(string lineSource, List<String> WordParce)
+        private void ParseLine(string lineSource, List<String> WordParce)
         {
             // слова выделяем делая проход с начала строки
             // добавим в самый конец пробел чтобы он там точно был
@@ -182,5 +184,9 @@ namespace TextToDB
         }
 
 
+        private void HashingWord(List<string> ToHash)
+        {
+
+        }
     }
 }
