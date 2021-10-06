@@ -81,40 +81,8 @@ namespace TextToDB
                 // ближайший символ, который может ограничивать слово
                 int NextDelimiter = 2147483647;
 
-                posDelimiter.Clear();
-                // 1 адрес первого пробела с начала строки
-                posDelimiter.Insert(0, lineSource.IndexOf(' '));
-                // 2 точки
-                posDelimiter.Insert(1, lineSource.IndexOf('.'));
-                // 3 запятой
-                posDelimiter.Insert(2, lineSource.IndexOf(','));
-                // 4 отрывающей скобки
-                posDelimiter.Insert(3, lineSource.IndexOf('('));
-                // 5 закрывающей скобки
-                posDelimiter.Insert(4, lineSource.IndexOf(')'));
-                // 6 двоеточия
-                posDelimiter.Insert(5, lineSource.IndexOf(':'));
-                // 7 точки с запятой
-                posDelimiter.Insert(6, lineSource.IndexOf(';'));
-                // 8 тире
-                posDelimiter.Insert(7, lineSource.IndexOf('-'));
-                // 9 обратный слэш
-                posDelimiter.Insert(8, lineSource.IndexOf('/'));
-                // 10 прямой слэш
-                posDelimiter.Insert(9, lineSource.IndexOf('\\'));
-                // 11 восклицательный знак
-                posDelimiter.Insert(10, lineSource.IndexOf('!'));
-                // 12 вопросительный знак
-                posDelimiter.Insert(11, lineSource.IndexOf('?'));
-                // 13 одинарные ковычки
-                posDelimiter.Insert(12, lineSource.IndexOf('\''));
-                // 14 двойные ковычки
-                posDelimiter.Insert(13, lineSource.IndexOf('"'));
-                // 15 треугольные влево
-                posDelimiter.Insert(14, lineSource.IndexOf('<'));
-                // 16 треугольные вправо
-                posDelimiter.Insert(15, lineSource.IndexOf('>'));
-
+                // получаем позиции разделителей строк
+                GetDelimiterPos(lineSource, posDelimiter);
 
                 // заканчивает парсинг строки если в строке не найдено ни одного
                 // символа, который может ограничивать слово 
@@ -151,9 +119,50 @@ namespace TextToDB
                     lineSource = lineSource.Remove(0, NextDelimiter + 1);
                     // делаем все прописными и в список
                     WordParce.Add(WordFromString.ToLower());
+
+
                 }
 
             } while (true);
+        }
+
+
+        // возвращаем позиции ограничителей слова
+        void GetDelimiterPos(string WorkLine, List<int> Delimiters)
+        {
+            Delimiters.Clear();
+            // 1 адрес первого пробела с начала строки
+            Delimiters.Insert(0, WorkLine.IndexOf(' '));
+            // 2 точки
+            Delimiters.Insert(1, WorkLine.IndexOf('.'));
+            // 3 запятой
+            Delimiters.Insert(2, WorkLine.IndexOf(','));
+            // 4 отрывающей скобки
+            Delimiters.Insert(3, WorkLine.IndexOf('('));
+            // 5 закрывающей скобки
+            Delimiters.Insert(4, WorkLine.IndexOf(')'));
+            // 6 двоеточия
+            Delimiters.Insert(5, WorkLine.IndexOf(':'));
+            // 7 точки с запятой
+            Delimiters.Insert(6, WorkLine.IndexOf(';'));
+            // 8 тире
+            Delimiters.Insert(7, WorkLine.IndexOf('-'));
+            // 9 обратный слэш
+            Delimiters.Insert(8, WorkLine.IndexOf('/'));
+            // 10 прямой слэш
+            Delimiters.Insert(9, WorkLine.IndexOf('\\'));
+            // 11 восклицательный знак
+            Delimiters.Insert(10, WorkLine.IndexOf('!'));
+            // 12 вопросительный знак
+            Delimiters.Insert(11, WorkLine.IndexOf('?'));
+            // 13 одинарные ковычки
+            Delimiters.Insert(12, WorkLine.IndexOf('\''));
+            // 14 двойные ковычки
+            Delimiters.Insert(13, WorkLine.IndexOf('"'));
+            // 15 треугольные влево
+            Delimiters.Insert(14, WorkLine.IndexOf('<'));
+            // 16 треугольные вправо
+            Delimiters.Insert(15, WorkLine.IndexOf('>'));
         }
 
 
