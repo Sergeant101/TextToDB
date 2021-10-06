@@ -8,7 +8,10 @@ namespace TextToDB
     {
         private string Path = null;
 
+        // класс для проверки txt файла
         CheckFile checker = null;
+
+        private bool FilePassChek;
 
         // =========================================================================================================
         // Приглашение к выбору файла
@@ -27,7 +30,7 @@ namespace TextToDB
         public void Check()
         {
             // если задан путь к файлу берём его, иначе по умолчанию из C:\Test\Example.txt
-            // можно проверку на наличие расширения .txt сделать если вдруг не указан !!!
+            // можно было бы проверку на наличие расширения .txt сделать если вдруг не указан !!!
             if (Path != "")
             {
                 checker = new CheckFile(Path);
@@ -38,21 +41,29 @@ namespace TextToDB
             }
 
             // файл не прошел проверку на существование
-            if (!checker.ExistOK)
+            if (!checker.IsExist)
             {
                 Console.WriteLine("\tФайл не найден");
             }
 
             // файл не прошел проверку на размер
-            if (checker.ExistOK && !checker.LessThan100_OK)
+            if (checker.IsExist && !checker.IsLessThan100)
             {
                 Console.WriteLine("\tФайл более 100 Мбайт");
             }
 
             // файл не прошел проверку на кодировку
-            if (checker.LessThan100_OK && !checker.FileUTF8_OK)
+            if (checker.IsLessThan100 && !checker.IsFileUTF8)
             {
                 Console.WriteLine("\tФайл не сохранён в формате UTF-8");
+            }
+
+            // C файлом всё норм
+            FilePassChek = false;
+            if (checker.IsExist && checker.IsLessThan100 && checker.IsFileUTF8)
+            {
+                FilePassChek = true;
+                Console.WriteLine("\tФайл прошел проверку.");
             }
         }
 
@@ -64,6 +75,17 @@ namespace TextToDB
             get
             {
                 return checker.GetPath;
+            }
+        }
+
+
+        // =========================================================================================================
+        // Возвращаем признак прохождения проверки
+        public bool IsFileCkeck
+        {
+            get
+            {
+                return FilePassChek;
             }
         }
 

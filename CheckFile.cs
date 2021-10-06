@@ -11,20 +11,13 @@ namespace TextToDB
         private string Path = null;
 
         // Признак существования файла
-        private bool IsExist = false;
+        private bool ExistFile = false;
 
         // Признак файла меньше 100 МБ
-        private bool IsLessThan100 = false;
+        private bool LessThan100 = false;
 
         // Признак кодировки UTF-8
-        private bool IsFileUTF8 = false;
-
-
-
-        public long testSizeFile;
-        public char[] testBOM = new char[3];
-
-
+        private bool FileUTF8 = false;
 
 
         public CheckFile()
@@ -46,18 +39,14 @@ namespace TextToDB
         // Проводим процедуру проверки файлов
         private void ProcCheckFile()
         {
-            IsExist = FileExist();
+            ExistFile = FileExist();
 
-            if (IsExist)
+            if (ExistFile)
             {
                 // если файл существует проверяем размер
-                IsLessThan100 = FileSize();
-
-                if (IsLessThan100)
-                {
-                    // если размер файла в рамках задания проверяем кодировку
-                    IsFileUTF8 = FileEncoding();
-                }
+                LessThan100 = FileSize();
+                // проверяем кодировку
+                FileUTF8 = FileEncoding();
             }
         }
 
@@ -66,7 +55,6 @@ namespace TextToDB
         // Проверяем существует ли файл вообще
         private bool FileExist()
         {
-
             if (File.Exists(Path))
             {
                 return true;
@@ -123,9 +111,6 @@ namespace TextToDB
                 char[] b = new char[3];
                 int nBytesRead = fs.Read(b, 0, 3);
 
-                testSizeFile = nBytesRead;
-                testBOM = b;
-
                 if (nBytesRead == 3 &&
                     b[0] == 0xEF &&
                     b[1] == 0xBB &&
@@ -143,36 +128,35 @@ namespace TextToDB
 
         // =========================================================================================================
         // Признак существования файла
-        public bool ExistOK
+        public bool IsExist
         {
             get
             {
-                return IsExist;
+                return ExistFile;
             }
         }
 
 
         // =========================================================================================================
         // Признак файла меньше 100 МБ
-        public bool LessThan100_OK
+        public bool IsLessThan100
         {
             get
             {
-                return IsLessThan100;
+                return LessThan100;
             }
         }
 
 
         // =========================================================================================================
         // Признак файла с кодировкой UTF8
-        public bool FileUTF8_OK
+        public bool IsFileUTF8
         {
             get
             {
-                return IsFileUTF8;
+                return FileUTF8;
             }
         }
-
 
 
         // =========================================================================================================

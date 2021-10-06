@@ -10,10 +10,18 @@ namespace TextToDB
         // Путь к файлу
         private string Path = null;
 
+        // Признак завершения считывания данных
+        private bool Complete = false;
+
+        // Хранилище распарсенных слов
+        Dictionary<string, int> HashWord = new Dictionary<string, int>();
+
         public PrepareText(string _path)
         {
             // Получаем путь к файлу для парсинга
             Path = _path;
+            Console.WriteLine("\tОбработка файла.");
+            ReadFile();
         }
 
 
@@ -35,13 +43,18 @@ namespace TextToDB
                         WordsFromTxt.Clear();
                         // получаем список слов из считанной строки
                         ParseLine(line, WordsFromTxt);
-
-                    }
+                        AddToHash(WordsFromTxt, HashWord);
+                    }                    
+                    Complete = true;
                 }
+            }
+            catch
+            {
+                Console.WriteLine("\tОшибка чтения файла");
             }
             finally
             {
-                // тут можно чё нить добавить о том что чтение не удалось
+                Console.WriteLine("\tОбработка файла завершена");
             }
         }
 
@@ -50,7 +63,7 @@ namespace TextToDB
         // Парсим строку
         private void ParseLine(string lineSource, List<String> WordParce)
         {
-            // слова выделяем делая проход с начала строки
+            // слова выделяем делая проход слева направо 
             // добавим в самый конец пробел чтобы он там точно был
             lineSource = lineSource + " ";
 
@@ -72,7 +85,7 @@ namespace TextToDB
                 // ближайший символ, который может ограничивать слово
                 int NextDelimiter = 2147483647;
 
-                // получаем позиции разделителей строк
+                // получаем позиции разделителей слов
                 GetDelimiterPos(lineSource, posDelimiter);
 
                 // заканчивает парсинг строки если в строке не найдено ни одного
@@ -82,6 +95,7 @@ namespace TextToDB
                 {
                     if (i > 0)
                     {
+                        // если хотя бы один разделитель слов из списка найден, то
                         StopLoop = false;
                     }
                     if ((i < NextDelimiter) && (i >= 0))
@@ -118,8 +132,9 @@ namespace TextToDB
         }
 
 
-        // возвращаем позиции ограничителей слова
-        void GetDelimiterPos(string WorkLine, List<int> Delimiters)
+        // =========================================================================================================
+        // возвращаем позиции разделителей слов
+        private void GetDelimiterPos(string WorkLine, List<int> Delimiters)
         {
             Delimiters.Clear();
             // 1 адрес первого пробела с начала строки
@@ -184,9 +199,52 @@ namespace TextToDB
         }
 
 
-        private void HashingWord(List<string> ToHash)
+        // =========================================================================================================
+        // Проверяем чтобы слова состояли только из русских и английских символов
+        private void AddToHash(List<string> ToHash, Dictionary<string, int> hash)
         {
-
+            ToHash.ForEach(delegate (string word)
+            {
+                try
+                {
+                    hash.Add(word, 1);
+                }
+                catch
+                {
+                    int count = hash[word];
+                    hash[word] = ++count;
+                }
+            });
         }
+
+
+        // возвращаем данные о количестве слов в файле
+        public Dictionary<string, int> GetHash
+        {
+            
+            get
+            {
+                Dictionary<string, int> HashTemp = new Dictionary<string, int>();
+                foreach(KeyValuePair<string, int> h in HashWord)
+                {
+                    if (h.Value >= 2)
+                    {
+                        HashTemp.Add(h.Key, h.Value);
+                    }
+                }
+                return HashTemp;
+            }
+        }
+
+
+        // возвращаем признак завершения обработки файла
+        public bool IsComplete
+        {
+            get
+            {
+                return Complete;
+            }
+        }
+
     }
 }
