@@ -65,15 +65,6 @@ namespace TextToDB
                 // список с позициями разделителей слов
                 List<int> posDelimiter = new List<int>(16);
 
-                posDelimiter.ForEach(delegate (int i) {
-                    posDelimiter.Add(0);
-                });
-
-                posDelimiter.ForEach(delegate (int i)
-                {
-                    Console.WriteLine(Convert.ToString(i));
-                });
-
 
                 do
                 {
