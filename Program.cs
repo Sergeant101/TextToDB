@@ -2,6 +2,7 @@
 using System.IO;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 
 namespace TextToDB
 {
@@ -20,6 +21,9 @@ namespace TextToDB
             Dictionary<string, int> Hash = new Dictionary<string, int>();
             // /тест удалить
 
+            string s = RuntimeInformation.FrameworkDescription;
+
+            Console.WriteLine(s);
 
             // Диалоговое окно
             StartDialogs begginTxtToDB = new StartDialogs();
