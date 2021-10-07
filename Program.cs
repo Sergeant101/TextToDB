@@ -15,19 +15,7 @@ namespace TextToDB
             // Путь к файлу
             string Path = null;
 
-
-            // тест удалить
-            List<string> teststring = new List<string>();
-
             Dictionary<string, int> Hash = new Dictionary<string, int>();
-
-
-            string s = RuntimeInformation.FrameworkDescription;
-
-            Console.WriteLine(s);
-            // /тест удалить
-
-
 
             // Диалоговое окно
             StartDialogs begginTxtToDB = new StartDialogs();
@@ -59,14 +47,9 @@ namespace TextToDB
                     }
                 }
 
-
-                foreach (KeyValuePair<string, int> show in Hash)
-                {
-                    Console.WriteLine(show.Key + " " + Convert.ToString(show.Value));
-                };
-
                 refreshDB = new RefreshDB(Hash);
 
+                Console.WriteLine("\tПрограмма завершила работу");
             }
                          
             
