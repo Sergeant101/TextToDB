@@ -68,41 +68,8 @@ namespace TextToDB
                 refreshDB = new RefreshDB(Hash);
 
             }
-
-
-
-            // =========================================================================================================
-            // тестирование удалить
-
-            string selectDB = "SELECT Count FROM t WHERE Word = 'tommi'";
-
-            string ExistConnetion = @"Data Source=.\SQLEXPRESS;Initial Catalog = MyDatabase;Integrated Security = True";
-
-            using (SqlConnection conn = new SqlConnection(ExistConnetion))
-            {
-                conn.Open();
-
-                SqlCommand command = new SqlCommand(selectDB, conn);
-                SqlDataReader reader = command.ExecuteReader();
-
-                if (reader.Read())
-                {
-
-                    int Count = Convert.ToInt32(reader.GetValue(0));
-                    if (Count > 0)
-                    {
-                        Console.WriteLine("Yes");
-                    }
-                    else
-                    {
-                        Console.WriteLine("None");
-                    }
-                    Count++;
-                    //object word = reader.GetValue(1);
-                    //object count = reader.GetValue(2);
-                    Console.WriteLine(Count);
-                }
-            }
+                         
+            
 
         }
     }
