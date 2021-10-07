@@ -3,6 +3,7 @@ using System.IO;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
+using System.Data.SqlClient;
 
 namespace TextToDB
 {
@@ -19,9 +20,12 @@ namespace TextToDB
             List<string> teststring = new List<string>();
 
             Dictionary<string, int> Hash = new Dictionary<string, int>();
-            // /тест удалить
+
 
             string s = RuntimeInformation.FrameworkDescription;
+            // /тест удалить
+
+
 
             Console.WriteLine(s);
 
@@ -30,6 +34,9 @@ namespace TextToDB
 
             // Парсинг слов из текста
             PrepareText prepareText;
+
+            // Работа с базой данных
+            RefreshDB refreshDB = new RefreshDB();
 
             // приглашение к вводу данных и диалоги
             begginTxtToDB.Hello();
@@ -42,11 +49,18 @@ namespace TextToDB
                 // извлекаем данные
                 prepareText = new PrepareText(begginTxtToDB.GetPath);    
                 
-                if (prepareText.IsComplete)
+                // ждём пока всё извлечётся
+                while (true)
                 {
-                    Hash = prepareText.GetHash;
+                    if (prepareText.IsComplete)
+                    {
+                        Hash = prepareText.GetHash;
+                        break;
+                    }
                 }
+
             }
+
 
             
             // =========================================================================================================
@@ -58,9 +72,28 @@ namespace TextToDB
                 Console.WriteLine(show.Key + " " + Convert.ToString(show.Value));
             };
 
+            
+            
+            string ExistConnetion = @"Data Source=.\SQLEXPRESS;Initial Catalog = MyDatabase;Integrated Security = True";
 
+            string UpDataDB = "UPDATE MyDatabase SET Count = 2 WHERE id = 2";
+
+            string InsertDB = "INSERT INTO t (Word, Count) VALUES ('tommi', 18)";
+
+            using (SqlConnection conn = new SqlConnection(ExistConnetion))
+            {
+                conn.Open();
+                if (conn.State == System.Data.ConnectionState.Open)
+                {
+                    SqlCommand sqlCommand = new SqlCommand(InsertDB, conn);
+                    sqlCommand.ExecuteNonQuery();
+                    conn.Close();
  
-
+                }               
+                    
+            }
+            
+            
         }
     }
 }

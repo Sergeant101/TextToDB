@@ -7,7 +7,6 @@ C:\_MAIN_\Programs\TextToDB\bin\Debug\netcoreapp3.1\TextToDB.pdb
 C:\_MAIN_\Programs\TextToDB\obj\Debug\netcoreapp3.1\TextToDB.csprojAssemblyReference.cache
 C:\_MAIN_\Programs\TextToDB\obj\Debug\netcoreapp3.1\TextToDB.AssemblyInfoInputs.cache
 C:\_MAIN_\Programs\TextToDB\obj\Debug\netcoreapp3.1\TextToDB.AssemblyInfo.cs
-C:\_MAIN_\Programs\TextToDB\obj\Debug\netcoreapp3.1\TextToDB.csproj.CoreCompileInputs.cache
 C:\_MAIN_\Programs\TextToDB\obj\Debug\netcoreapp3.1\TextToDB.dll
 C:\_MAIN_\Programs\TextToDB\obj\Debug\netcoreapp3.1\TextToDB.pdb
 C:\_MAIN_\Programs\TextToDB\obj\Debug\netcoreapp3.1\TextToDB.genruntimeconfig.cache
@@ -24,3 +23,11 @@ C:\Users\Admin\source\repos\TextToDB\obj\Debug\netcoreapp3.1\TextToDB.csproj.Cor
 C:\Users\Admin\source\repos\TextToDB\obj\Debug\netcoreapp3.1\TextToDB.dll
 C:\Users\Admin\source\repos\TextToDB\obj\Debug\netcoreapp3.1\TextToDB.pdb
 C:\Users\Admin\source\repos\TextToDB\obj\Debug\netcoreapp3.1\TextToDB.genruntimeconfig.cache
+C:\_MAIN_\Programs\TextToDB\bin\Debug\netcoreapp3.1\System.Data.SqlClient.dll
+C:\_MAIN_\Programs\TextToDB\bin\Debug\netcoreapp3.1\runtimes\win-arm64\native\sni.dll
+C:\_MAIN_\Programs\TextToDB\bin\Debug\netcoreapp3.1\runtimes\win-x64\native\sni.dll
+C:\_MAIN_\Programs\TextToDB\bin\Debug\netcoreapp3.1\runtimes\win-x86\native\sni.dll
+C:\_MAIN_\Programs\TextToDB\bin\Debug\netcoreapp3.1\runtimes\unix\lib\netcoreapp2.1\System.Data.SqlClient.dll
+C:\_MAIN_\Programs\TextToDB\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp2.1\System.Data.SqlClient.dll
+C:\_MAIN_\Programs\TextToDB\obj\Debug\netcoreapp3.1\TextToDB.csproj.CoreCompileInputs.cache
+C:\_MAIN_\Programs\TextToDB\obj\Debug\netcoreapp3.1\TextToDB.csproj.CopyComplete
