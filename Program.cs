@@ -23,11 +23,11 @@ namespace TextToDB
 
 
             string s = RuntimeInformation.FrameworkDescription;
+
+            Console.WriteLine(s);
             // /тест удалить
 
 
-
-            Console.WriteLine(s);
 
             // Диалоговое окно
             StartDialogs begginTxtToDB = new StartDialogs();
@@ -35,8 +35,8 @@ namespace TextToDB
             // Парсинг слов из текста
             PrepareText prepareText;
 
-            // Работа с базой данных
-            RefreshDB refreshDB = new RefreshDB();
+            // Обновление данных базы данных
+            RefreshDB refreshDB = null;
 
             // приглашение к вводу данных и диалоги
             begginTxtToDB.Hello();
@@ -59,41 +59,51 @@ namespace TextToDB
                     }
                 }
 
+
+                foreach (KeyValuePair<string, int> show in Hash)
+                {
+                    Console.WriteLine(show.Key + " " + Convert.ToString(show.Value));
+                };
+
+                refreshDB = new RefreshDB(Hash);
+
             }
 
 
-            
+
             // =========================================================================================================
             // тестирование удалить
 
+            string selectDB = "SELECT Count FROM t WHERE Word = 'tommi'";
 
-            foreach(KeyValuePair<string, int> show in Hash)
-            {
-                Console.WriteLine(show.Key + " " + Convert.ToString(show.Value));
-            };
-
-            
-            
             string ExistConnetion = @"Data Source=.\SQLEXPRESS;Initial Catalog = MyDatabase;Integrated Security = True";
-
-            string UpDataDB = "UPDATE MyDatabase SET Count = 2 WHERE id = 2";
-
-            string InsertDB = "INSERT INTO t (Word, Count) VALUES ('tommi', 18)";
 
             using (SqlConnection conn = new SqlConnection(ExistConnetion))
             {
                 conn.Open();
-                if (conn.State == System.Data.ConnectionState.Open)
+
+                SqlCommand command = new SqlCommand(selectDB, conn);
+                SqlDataReader reader = command.ExecuteReader();
+
+                if (reader.Read())
                 {
-                    SqlCommand sqlCommand = new SqlCommand(InsertDB, conn);
-                    sqlCommand.ExecuteNonQuery();
-                    conn.Close();
- 
-                }               
-                    
+
+                    int Count = Convert.ToInt32(reader.GetValue(0));
+                    if (Count > 0)
+                    {
+                        Console.WriteLine("Yes");
+                    }
+                    else
+                    {
+                        Console.WriteLine("None");
+                    }
+                    Count++;
+                    //object word = reader.GetValue(1);
+                    //object count = reader.GetValue(2);
+                    Console.WriteLine(Count);
+                }
             }
-            
-            
+
         }
     }
 }

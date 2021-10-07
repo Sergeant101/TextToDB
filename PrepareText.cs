@@ -43,6 +43,7 @@ namespace TextToDB
                         WordsFromTxt.Clear();
                         // получаем список слов из считанной строки
                         ParseLine(line, WordsFromTxt);
+                        // добавляем полученные слова в хэш таблицу
                         AddToHash(WordsFromTxt, HashWord);
                     }                    
                     Complete = true;
@@ -125,7 +126,6 @@ namespace TextToDB
                     // делаем все прописными и в список
                     WordParce.Add(WordFromString.ToLower());
 
-
                 }
 
             } while (true);
@@ -200,7 +200,7 @@ namespace TextToDB
 
 
         // =========================================================================================================
-        // Проверяем чтобы слова состояли только из русских и английских символов
+        // Добавляем слова из распарсенной строки в словарь
         private void AddToHash(List<string> ToHash, Dictionary<string, int> hash)
         {
             ToHash.ForEach(delegate (string word)
@@ -227,7 +227,7 @@ namespace TextToDB
                 Dictionary<string, int> HashTemp = new Dictionary<string, int>();
                 foreach(KeyValuePair<string, int> h in HashWord)
                 {
-                    if (h.Value >= 2)
+                    if (h.Value >= 4)
                     {
                         HashTemp.Add(h.Key, h.Value);
                     }
